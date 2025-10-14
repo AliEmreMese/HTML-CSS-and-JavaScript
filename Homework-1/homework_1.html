@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CENG-BANK | Welcome</title>
+    
+    <link rel="stylesheet" href="homework_1.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+</head>
+<body>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <i class="fa-solid fa-euro-sign"></i>
+                <div>
+                    <span>Cheap</span>
+                    <span>Currency</span>
+                </div>
+            </div>
+            <div class="bank-icon">
+                <i class="fa-solid fa-building-columns"></i>
+            </div>
+            <div class="slogan">
+                <p>Money is your time, time is our money</p>
+            </div>
+        </header>
+
+        <main class="main-content">
+            
+            <aside class="left-sidebar">
+                <a href="#" class="menu-item active">
+                    <i class="fa-solid fa-dollar-sign"></i>
+                    <span>12.23</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-coins"></i>
+                    <span>12.23</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>12.23</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-credit-card"></i>
+                    <span>12.23</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-gears"></i>
+                    <span>12.23</span>
+                </a>
+                <a href="#" class="menu-item">
+                    <i class="fa-solid fa-question-circle"></i>
+                    <span>12.23</span>
+                </a>
+            </aside>
+
+            <section class="center-content">
+                <h2>WELCOME YOUR BANK</h2>
+                <div class="info-cards-container">
+                    <div class="info-card">
+                        <h3>Heading</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Heading</h3>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit.</p>
+                    </div>
+                    <div class="info-card">
+                        <h3>Heading</h3>
+                        <p>Lorem ipsum dolor sit omat consectetur.</p>
+                    </div>
+                </div>
+                <div class="checkmark">
+                    <i class="fa-solid fa-square-check"></i>
+                </div>
+            </section>
+
+            <aside class="right-sidebar">
+                <div class="user-info">
+                    <i class="fa-solid fa-user"></i>
+                    <div class="user-details">
+                        <span>AHMET CAN</span>
+                        <a href="#">INFORMATION</a>
+                    </div>
+                </div>
+                <div class="wallet">
+                    <span>13.000 TL</span>
+                    <i class="fa-solid fa-wallet"></i>
+                </div>
+                <a href="#" class="card-link">
+                    <div class="transactions">
+                        <h4>Previous Transactions</h4>
+                        <div class="transaction-item"></div>
+                        <div class="transaction-item"></div>
+                        <div class="transaction-item"></div>
+                        <div class="transaction-item"></div>
+                    </div>
+                </a>
+            </aside>
+
+        </main>
+
+        <footer class="footer">
+            <div class="link-column">
+                <a href="#">Regular link</a>
+                <a href="#" class="disabled">Disabled link</a>
+            </div>
+            <div class="link-column">
+                <a href="#">Regular link</a>
+                <a href="#" class="disabled">Disabled link</a>
+            </div>
+            <div class="link-column">
+                <a href="#">Regular link</a>
+                <a href="#" class="disabled">Disabled link</a>
+            </div>
+        </footer>
+        
+        <div class="copyright">
+            @2023 CENG-BANK COPY RIGHT
+        </div>
+    </div>
+
+    <script>
+        // 1. Tüm menü butonlarını seçiyoruz
+        const menuItems = document.querySelectorAll('.menu-item');
+
+        // 2. Her bir butona bir tıklama olayı ekliyoruz
+        menuItems.forEach(clickedItem => {
+            clickedItem.addEventListener('click', function(e) {
+                // Linkin varsayılan davranışını (sayfa yenileme/yukarı atlama) engelle
+                e.preventDefault(); 
+                
+                // Önce, mevcut aktif olan butonu bul ve 'active' class'ını kaldır
+                const currentActive = document.querySelector('.menu-item.active');
+                if (currentActive) {
+                    currentActive.classList.remove('active');
+                }
+
+                // Sonra, sadece tıklanan bu butona 'active' class'ını ekle
+                clickedItem.classList.add('active');
+            });
+        });
+    </script>
+    </body>
+</html>
