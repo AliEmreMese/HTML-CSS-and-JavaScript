@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Track Shipment - Transport & Management System</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                🚢 BlueBerry Logistics
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="create.html">Create Shipment</a></li>
+                <li><a href="track.html">Track Shipment</a></li>
+                <li><a href="admin.html">Admin Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Track Your Shipment</h2>
+            </div>
+            
+            <p style="margin-bottom: 2rem;">
+                Enter your Order ID to track the current status and location of your shipment.
+            </p>
+
+            <form id="trackForm">
+                <div class="form-group">
+                    <label for="orderIdInput">Order ID *</label>
+                    <input type="text" id="orderIdInput" class="form-control" 
+                           placeholder="e.g., ORD-1729456789012" required>
+                    <small style="color: var(--text-gray);">You received this ID when you created your shipment</small>
+                </div>
+
+                <button type="submit" class="btn btn-primary" style="width: 100%; padding: 1rem;">
+                    🔍 Track Shipment
+                </button>
+            </form>
+        </div>
+
+        <!-- Tracking Result (Hidden by default) -->
+        <div id="trackingResult" class="hidden">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Shipment Status</h2>
+                </div>
+
+                <div class="alert alert-success">
+                    <span>✅</span>
+                    <div>
+                        <strong>Shipment Found!</strong>
+                        <p style="margin-top: 0.5rem;">Order ID: <strong id="displayOrderId">-</strong></p>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div>
+                        <h4 style="color: var(--primary-purple);">Order Information</h4>
+                        <div style="margin-top: 1rem; line-height: 2;">
+                            <p><strong>Customer:</strong> <span id="trackCustomerName">-</span></p>
+                            <p><strong>Product:</strong> <span id="trackProductName">-</span></p>
+                            <p><strong>Category:</strong> <span id="trackCategory">-</span></p>
+                            <p><strong>Weight:</strong> <span id="trackWeight">-</span> kg</p>
+                            <p><strong>Container:</strong> <span id="trackContainerType">-</span></p>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 style="color: var(--primary-purple);">Shipping Information</h4>
+                        <div style="margin-top: 1rem; line-height: 2;">
+                            <p><strong>From:</strong> Muğla, Turkey 🇹🇷</p>
+                            <p><strong>To:</strong> <span id="trackDestination">-</span></p>
+                            <p><strong>Distance:</strong> <span id="trackDistance">-</span> km</p>
+                            <p><strong>Price:</strong> <span id="trackPrice">-</span></p>
+                            <p><strong>Created:</strong> <span id="trackCreatedAt">-</span></p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: var(--bg-light); padding: 2rem; border-radius: 12px; margin-top: 2rem;">
+                    <h3 style="color: var(--primary-purple); text-align: center; margin-bottom: 1.5rem;">
+                        Current Status
+                    </h3>
+                    <div style="text-align: center;">
+                        <span id="statusBadge" class="badge">-</span>
+                        <p style="margin-top: 1rem; font-size: 1.1rem;" id="statusDescription">-</p>
+                    </div>
+                    
+                    <div id="containerInfo" class="alert alert-info hidden" style="margin-top: 1.5rem;">
+                        <span>📦</span>
+                        <div>
+                            <strong>Container Assigned:</strong> <span id="assignedContainerId">-</span>
+                            <p style="margin-top: 0.5rem;">Your shipment has been optimally packed and assigned to a container.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Status Timeline -->
+                <div style="margin-top: 2rem;">
+                    <h4 style="color: var(--primary-purple); margin-bottom: 1rem;">Shipment Journey</h4>
+                    <div class="timeline">
+                        <div class="timeline-item" id="timeline-pending">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h5>📋 Pending</h5>
+                                <p>Order received and awaiting container assignment</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" id="timeline-ready">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h5>📦 Ready for Transport</h5>
+                                <p>Container optimized and prepared for loading</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" id="timeline-transit">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h5>🚢 In Transit</h5>
+                                <p>Shipment is on the way to destination</p>
+                            </div>
+                        </div>
+                        <div class="timeline-item" id="timeline-delivered">
+                            <div class="timeline-marker"></div>
+                            <div class="timeline-content">
+                                <h5>✅ Delivered</h5>
+                                <p>Shipment successfully delivered</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Not Found Message (Hidden by default) -->
+        <div id="notFoundMessage" class="card hidden">
+            <div class="alert alert-danger">
+                <span>❌</span>
+                <div>
+                    <strong>Order Not Found</strong>
+                    <p style="margin-top: 0.5rem;">
+                        We couldn't find a shipment with that Order ID. Please check your ID and try again.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BlueBerry Logistics - Transport & Management System</p>
+    </footer>
+
+    <style>
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0.5rem;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-gray);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+            opacity: 0.4;
+        }
+
+        .timeline-item.active {
+            opacity: 1;
+        }
+
+        .timeline-item.active .timeline-marker {
+            background: var(--primary-purple);
+            border-color: var(--primary-purple);
+        }
+
+        .timeline-marker {
+            position: absolute;
+            left: -1.5rem;
+            width: 1rem;
+            height: 1rem;
+            border-radius: 50%;
+            background: white;
+            border: 2px solid var(--border-gray);
+        }
+
+        .timeline-content h5 {
+            margin-bottom: 0.25rem;
+            color: var(--text-dark);
+        }
+
+        .timeline-content p {
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .timeline {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-marker {
+                left: -1.25rem;
+                width: 0.75rem;
+                height: 0.75rem;
+            }
+
+            .timeline-content h5 {
+                font-size: 0.95rem;
+            }
+
+            .timeline-content p {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+
+    <script src="../js/track.js"></script>
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Confirmation - Transport & Management System</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                🚢 BlueBerry Logistics
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="create.html">Create Shipment</a></li>
+                <li><a href="track.html">Track Shipment</a></li>
+                <li><a href="admin.html">Admin Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="alert alert-success">
+            <span>✅</span>
+            <div>
+                <strong>Shipment Created Successfully!</strong>
+                <p style="margin-top: 0.5rem;">Your order has been received and is being processed. Save your Order ID for tracking.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2>Order Summary</h2>
+            </div>
+            
+            <div class="grid grid-2">
+                <div>
+                    <h4 style="color: var(--primary-purple);">Order Details</h4>
+                    <div style="margin-top: 1rem; line-height: 2;">
+                        <p><strong>Order ID:</strong> <span id="orderId" style="color: var(--primary-purple); font-size: 1.2rem;">-</span></p>
+                        <p><strong>Customer Name:</strong> <span id="customerName">-</span></p>
+                        <p><strong>Product:</strong> <span id="productName">-</span></p>
+                        <p><strong>Category:</strong> <span id="category">-</span></p>
+                        <p><strong>Weight:</strong> <span id="weight">-</span> kg</p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 style="color: var(--primary-purple);">Shipping Details</h4>
+                    <div style="margin-top: 1rem; line-height: 2;">
+                        <p><strong>From:</strong> Muğla, Turkey 🇹🇷</p>
+                        <p><strong>To:</strong> <span id="destination">-</span></p>
+                        <p><strong>Distance:</strong> <span id="distance">-</span> km</p>
+                        <p><strong>Container Type:</strong> <span id="containerType">-</span></p>
+                        <p><strong>Status:</strong> <span class="badge badge-pending">Pending</span></p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="background: linear-gradient(135deg, var(--primary-purple) 0%, var(--purple-light) 100%); color: white; padding: 2rem; border-radius: 12px; margin-top: 2rem; text-align: center;">
+                <h3 style="margin-bottom: 0.5rem;">Total Price</h3>
+                <div style="font-size: 3rem; font-weight: bold;" id="totalPrice">₺0</div>
+                <p style="opacity: 0.9; margin-top: 0.5rem;">
+                    <span id="priceCalculation">Calculation: - km × ₺- / km</span>
+                </p>
+            </div>
+
+            <div class="alert alert-info" style="margin-top: 2rem;">
+                <span>📅</span>
+                <div>
+                    <strong>Estimated Delivery Time:</strong> <span id="estimatedDelivery">5-7 business days</span>
+                    <p style="margin-top: 0.5rem; opacity: 0.9;">
+                        Your shipment will be processed and optimized for container loading. 
+                        You'll be notified when it's ready for transport.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3 style="color: var(--primary-purple);">What Happens Next?</h3>
+            <ol style="line-height: 2; margin-left: 1.5rem;">
+                <li><strong>Container Optimization:</strong> Your shipment will be assigned to an optimal container based on weight and destination.</li>
+                <li><strong>Quality Check:</strong> Our team will verify your product specifications before loading.</li>
+                <li><strong>Loading & Departure:</strong> Your shipment will be loaded onto our fleet and depart from Muğla.</li>
+                <li><strong>In Transit:</strong> Track your shipment in real-time as it travels to the destination.</li>
+                <li><strong>Delivery:</strong> Your products will be delivered to the specified destination.</li>
+            </ol>
+        </div>
+
+        <div style="text-align: center; margin-top: 2rem;">
+            <a href="track.html" class="btn btn-primary" style="margin-right: 1rem;">Track This Shipment</a>
+            <a href="create.html" class="btn btn-primary">Create Another Shipment</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 BlueBerry Logistics - Transport & Management System</p>
+    </footer>
+
+    <script src="../js/result.js"></script>
+</body>
+</html>

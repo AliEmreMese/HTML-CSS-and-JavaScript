@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Transport & Management System</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content">
+            <h2 style="color: var(--primary-purple); margin-bottom: 1.5rem;">🔐 Admin Login</h2>
+            <p style="margin-bottom: 1.5rem;">Enter the admin password to access the dashboard.</p>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" class="form-control" placeholder="Enter admin password" required>
+                    <small style="color: var(--text-gray);">Hint: Use "admin123" to login</small>
+                </div>
+                <button type="submit" class="btn btn-primary" style="width: 100%;">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div id="adminDashboard" class="hidden">
+        <!-- Top Navigation -->
+        <nav class="admin-nav">
+            <div class="nav-container">
+                <div class="logo">
+                    🚢 BlueBerry Logistics - Admin
+                </div>
+                <div>
+                    <a href="../index.html" class="btn btn-secondary" style="padding: 0.5rem 1rem;">
+                        ← Back to Portal
+                    </a>
+                    <button id="logoutBtn" class="btn btn-danger" style="padding: 0.5rem 1rem; margin-left: 0.5rem;">
+                        Logout
+                    </button>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Dashboard Layout -->
+        <div class="dashboard-container">
+            <!-- Sidebar -->
+            <aside class="sidebar">
+                <div class="sidebar-menu">
+                    <a href="#" class="menu-item active" data-tab="shipments">
+                        <span class="menu-icon">📦</span>
+                        <span>Shipments</span>
+                    </a>
+                    <a href="#" class="menu-item" data-tab="containers">
+                        <span class="menu-icon">🎯</span>
+                        <span>Container Optimization</span>
+                    </a>
+                    <a href="#" class="menu-item" data-tab="fleet">
+                        <span class="menu-icon">🚢</span>
+                        <span>Fleet Management</span>
+                    </a>
+                    <a href="#" class="menu-item" data-tab="financials">
+                        <span class="menu-icon">💰</span>
+                        <span>Financials</span>
+                    </a>
+                    <a href="#" class="menu-item" data-tab="inventory">
+                        <span class="menu-icon">📊</span>
+                        <span>Inventory</span>
+                    </a>
+                    <a href="#" class="menu-item" data-tab="reports">
+                        <span class="menu-icon">📄</span>
+                        <span>Reports</span>
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Content -->
+            <main class="dashboard-main">
+                <!-- Shipments Tab -->
+                <section id="tab-shipments" class="tab-content active">
+                    <h1>Shipment Management</h1>
+                    
+                    <div class="grid grid-3" style="margin-bottom: 2rem;">
+                        <div class="stat-card">
+                            <h3>Total Shipments</h3>
+                            <div class="stat-value" id="totalShipments">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Pending</h3>
+                            <div class="stat-value" id="pendingShipments">0</div>
+                        </div>
+                        <div class="stat-card">
+                            <h3>Completed</h3>
+                            <div class="stat-value" id="completedShipments">0</div>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>All Shipments</h3>
+                        </div>
+                        <div class="table-container">
+                            <table id="shipmentsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Order ID</th>
+                                        <th>Customer</th>
+                                        <th>Product</th>
+                                        <th>Weight (kg)</th>
+                                        <th>Destination</th>
+                                        <th>Container</th>
+                                        <th>Price</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="shipmentsTableBody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Container Optimization Tab -->
+                <section id="tab-containers" class="tab-content">
+                    <h1>Container Optimization</h1>
+                    <p>Optimize container usage using the First-Fit Decreasing Algorithm</p>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Pending Shipments</h3>
+                        </div>
+                        <div id="pendingShipmentsContainer">
+                            <!-- Populated by JS -->
+                        </div>
+                        <button id="optimizeBtn" class="btn btn-primary" style="margin-top: 1rem;">
+                            🎯 Optimize Containers
+                        </button>
+                        <div id="optimizationResult" class="hidden" style="margin-top: 1rem;">
+                            <!-- Results shown here -->
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Container Status</h3>
+                        </div>
+                        <div id="containerStatusGrid" class="grid grid-3">
+                            <!-- Populated by JS -->
+                        </div>
+                        <div id="containerDetails" style="margin-top: 1rem;">
+                            <!-- Detailed container list populated by JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Fleet Management Tab -->
+                <section id="tab-fleet" class="tab-content">
+                    <h1>Fleet Management</h1>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>🚢 Ships</h3>
+                        </div>
+                        <div class="table-container">
+                            <table id="shipsTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Capacity (kg)</th>
+                                        <th>Fuel Cost/km</th>
+                                        <th>Crew Cost</th>
+                                        <th>Maintenance</th>
+                                        <th>Base Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="shipsTableBody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>🚚 Trucks</h3>
+                        </div>
+                        <div class="table-container">
+                            <table id="trucksTable">
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Type</th>
+                                        <th>Capacity (kg)</th>
+                                        <th>Fuel Cost/km</th>
+                                        <th>Driver Cost</th>
+                                        <th>Maintenance</th>
+                                        <th>Base Cost</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="trucksTableBody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Trip Expense Calculator</h3>
+                        </div>
+                        <form id="expenseCalculatorForm">
+                            <div class="form-group">
+                                <label for="vehicleSelect">Select Vehicle</label>
+                                <select id="vehicleSelect" class="form-control" required>
+                                    <!-- Populated by JS -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="distanceInput">Distance (km)</label>
+                                <input type="number" id="distanceInput" class="form-control" min="1" placeholder="e.g., 2000" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">Calculate Expense</button>
+                        </form>
+                        <div id="expenseResult" class="hidden" style="margin-top: 1.5rem;">
+                            <!-- Result shown here -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Financials Tab -->
+                <section id="tab-financials" class="tab-content">
+                    <h1>Financial Overview</h1>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Financial Summary</h3>
+                        </div>
+                        <div class="grid grid-2" style="margin-bottom: 2rem;">
+                            <div class="stat-card">
+                                <h3>Total Revenue</h3>
+                                <div class="stat-value" id="totalRevenue">₺0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Total Expenses</h3>
+                                <div class="stat-value" id="totalExpenses">₺0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Net Income</h3>
+                                <div class="stat-value" id="netIncome">₺0</div>
+                            </div>
+                            <div class="stat-card">
+                                <h3>Profit After Tax</h3>
+                                <div class="stat-value" id="profitAfterTax">₺0</div>
+                            </div>
+                        </div>
+                        
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Amount</th>
+                                </tr>
+                            </thead>
+                            <tbody id="financialsTableBody">
+                                <!-- Populated by JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Inventory Tab -->
+                <section id="tab-inventory" class="tab-content">
+                    <h1>Inventory Management</h1>
+                    
+                    <div id="lowStockAlerts">
+                        <!-- Alerts populated by JS -->
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3>Product Inventory</h3>
+                        </div>
+                        <div class="table-container">
+                            <table id="inventoryTable">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Current Quantity (kg)</th>
+                                        <th>Minimum Stock (kg)</th>
+                                        <th>Status</th>
+                                        <th>Stock Level</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inventoryTableBody">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reports Tab -->
+                <section id="tab-reports" class="tab-content">
+                    <h1>Comprehensive Report</h1>
+                    
+                    <div style="text-align: right; margin-bottom: 1rem;">
+                        <button id="exportPdfBtn" class="btn btn-primary">
+                            📄 Export to PDF
+                        </button>
+                    </div>
+
+                    <div id="reportContent">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Executive Summary</h3>
+                            </div>
+                            <p style="font-size: 1.1rem;">
+                                This report provides a comprehensive overview of BlueBerry Logistics operations, 
+                                including financial performance, shipment statistics, and inventory status.
+                            </p>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Financial Summary</h3>
+                            </div>
+                            <div id="reportFinancials">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Operational Metrics</h3>
+                            </div>
+                            <div id="reportMetrics" class="grid grid-3">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Products Sold by Category</h3>
+                            </div>
+                            <div id="reportProductsSold">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <h3>Remaining Inventory</h3>
+                            </div>
+                            <div id="reportInventory">
+                                <!-- Populated by JS -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Include jsPDF library for PDF export -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="../js/admin.js"></script>
+</body>
+</html>
