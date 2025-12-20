@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DSA Learning Platform</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-brand" onclick="showDashboard()">
+            <i class="fas fa-code"></i>
+            <span>DSA Learning Platform</span>
+        </div>
+        <div class="nav-links">
+            <a href="#" onclick="showDashboard()" class="nav-link active">
+                <i class="fas fa-home"></i> Dashboard
+            </a>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle">
+                    <i class="fas fa-sitemap"></i> Data Structures
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#" onclick="loadModule('avl-tree')">AVL Tree</a>
+                    <a href="#" onclick="loadModule('bst')">Binary Search Tree</a>
+                    <a href="#" onclick="loadModule('linked-list')">Linked Lists</a>
+                    <a href="#" onclick="loadModule('dynamic-static-list')">Dynamic & Static Lists</a>
+                    <a href="#" onclick="loadModule('stack-queue')">Stacks & Queues</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle">
+                    <i class="fas fa-sort"></i> Sorting
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#" onclick="loadModule('bubble-sort')">Bubble Sort</a>
+                    <a href="#" onclick="loadModule('quick-sort')">Quick Sort</a>
+                    <a href="#" onclick="loadModule('merge-sort')">Merge Sort</a>
+                    <a href="#" onclick="loadModule('selection-sort')">Selection Sort</a>
+                    <a href="#" onclick="loadModule('insertion-sort')">Insertion Sort</a>
+                </div>
+            </div>
+            <div class="dropdown">
+                <a href="#" class="nav-link dropdown-toggle">
+                    <i class="fas fa-search"></i> Searching
+                </a>
+                <div class="dropdown-menu">
+                    <a href="#" onclick="loadModule('linear-search')">Linear Search</a>
+                    <a href="#" onclick="loadModule('binary-search')">Binary Search</a>
+                </div>
+            </div>
+        </div>
+        <div class="mode-toggle">
+            <button id="modeBtn" class="mode-btn" onclick="toggleMode()">
+                <i class="fas fa-graduation-cap"></i> Learning Mode
+            </button>
+        </div>
+    </nav>
+
+    <main id="main-content">
+        <section id="dashboard" class="dashboard">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Master Data Structures & Algorithms</h1>
+                    <p>Interactive visualizations to help you understand the fundamentals of computer science</p>
+                    <div class="hero-stats">
+                        <div class="stat">
+                            <i class="fas fa-sitemap"></i>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Data Structures</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-sort"></i>
+                            <span class="stat-number">5</span>
+                            <span class="stat-label">Sorting Algorithms</span>
+                        </div>
+                        <div class="stat">
+                            <i class="fas fa-search"></i>
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Search Algorithms</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="hero-animation">
+                    <div class="floating-nodes">
+                        <div class="node n1">7</div>
+                        <div class="node n2">3</div>
+                        <div class="node n3">12</div>
+                        <div class="node n4">1</div>
+                        <div class="node n5">9</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2><i class="fas fa-sitemap"></i> Data Structures</h2>
+            </div>
+            <div class="card-grid data-structures">
+                <div class="card" onclick="loadModule('avl-tree')">
+                    <div class="card-icon">
+                        <i class="fas fa-tree"></i>
+                    </div>
+                    <h3>AVL Tree</h3>
+                    <p>Self-balancing binary search tree with automatic rotations to maintain O(log n) operations.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Insert</span>
+                            <span><i class="fas fa-check"></i> Delete</span>
+                            <span><i class="fas fa-check"></i> Search</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Rotations</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(log n)</span>
+                        <span>Space: O(n)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('bst')">
+                    <div class="card-icon">
+                        <i class="fas fa-code-branch"></i>
+                    </div>
+                    <h3>Binary Search Tree</h3>
+                    <p>Hierarchical data structure with nodes containing at most two children, ordered by key.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Insert</span>
+                            <span><i class="fas fa-check"></i> Delete</span>
+                            <span><i class="fas fa-check"></i> Search</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Traversal</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(log n) - O(n)</span>
+                        <span>Space: O(n)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('linked-list')">
+                    <div class="card-icon">
+                        <i class="fas fa-link"></i>
+                    </div>
+                    <h3>Linked Lists</h3>
+                    <p>Linear data structures with singly, doubly, and circular variants connected via pointers.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Singly</span>
+                            <span><i class="fas fa-check"></i> Doubly</span>
+                            <span><i class="fas fa-check"></i> Circular</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Operations</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(1) - O(n)</span>
+                        <span>Space: O(n)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('dynamic-static-list')">
+                    <div class="card-icon">
+                        <i class="fas fa-list"></i>
+                    </div>
+                    <h3>Dynamic & Static Lists</h3>
+                    <p>Compare fixed-size arrays with dynamically resizable arrays and their operations.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Static Array</span>
+                            <span><i class="fas fa-check"></i> Dynamic Array</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Resize</span>
+                            <span><i class="fas fa-check"></i> Compare</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(1) - O(n)</span>
+                        <span>Space: O(n)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('stack-queue')">
+                    <div class="card-icon">
+                        <i class="fas fa-layer-group"></i>
+                    </div>
+                    <h3>Stacks & Queues</h3>
+                    <p>LIFO and FIFO data structures essential for many algorithms and applications.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Push/Pop</span>
+                            <span><i class="fas fa-check"></i> Enqueue/Dequeue</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Peek</span>
+                            <span><i class="fas fa-check"></i> Visualize</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(1)</span>
+                        <span>Space: O(n)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2><i class="fas fa-sort"></i> Sorting Algorithms</h2>
+            </div>
+            <div class="card-grid sorting">
+                <div class="card" onclick="loadModule('bubble-sort')">
+                    <div class="card-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <h3>Bubble Sort</h3>
+                    <p>Simple comparison-based algorithm that repeatedly swaps adjacent elements.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Step-by-step</span>
+                            <span><i class="fas fa-check"></i> Comparisons</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Swaps</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(n²)</span>
+                        <span>Space: O(1)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('quick-sort')">
+                    <div class="card-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3>Quick Sort</h3>
+                    <p>Efficient divide-and-conquer algorithm using pivot-based partitioning.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Partitioning</span>
+                            <span><i class="fas fa-check"></i> Pivot Selection</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Recursion</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(n log n)</span>
+                        <span>Space: O(log n)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('merge-sort')">
+                    <div class="card-icon">
+                        <i class="fas fa-object-group"></i>
+                    </div>
+                    <h3>Merge Sort</h3>
+                    <p>Stable divide-and-conquer algorithm that divides, sorts, and merges subarrays.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Divide</span>
+                            <span><i class="fas fa-check"></i> Conquer</span>
+                            <span><i class="fas fa-check"></i> Merge</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(n log n)</span>
+                        <span>Space: O(n)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('selection-sort')">
+                    <div class="card-icon">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <h3>Selection Sort</h3>
+                    <p>In-place algorithm that selects the minimum element and places it at the beginning.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Find Minimum</span>
+                            <span><i class="fas fa-check"></i> Swap</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> In-place</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(n²)</span>
+                        <span>Space: O(1)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('insertion-sort')">
+                    <div class="card-icon">
+                        <i class="fas fa-arrow-down"></i>
+                    </div>
+                    <h3>Insertion Sort</h3>
+                    <p>Builds sorted array one element at a time by inserting each into correct position.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Insert</span>
+                            <span><i class="fas fa-check"></i> Shift</span>
+                            <span><i class="fas fa-check"></i> Adaptive</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(n²)</span>
+                        <span>Space: O(1)</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-title">
+                <h2><i class="fas fa-search"></i> Searching Algorithms</h2>
+            </div>
+            <div class="card-grid searching">
+                <div class="card" onclick="loadModule('linear-search')">
+                    <div class="card-icon">
+                        <i class="fas fa-arrow-right"></i>
+                    </div>
+                    <h3>Linear Search</h3>
+                    <p>Sequential search that checks each element until the target is found.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Sequential</span>
+                            <span><i class="fas fa-check"></i> Unsorted Arrays</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Simple</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(n)</span>
+                        <span>Space: O(1)</span>
+                    </div>
+                </div>
+
+                <div class="card" onclick="loadModule('binary-search')">
+                    <div class="card-icon">
+                        <i class="fas fa-divide"></i>
+                    </div>
+                    <h3>Binary Search</h3>
+                    <p>Efficient algorithm that repeatedly divides the search interval in half.</p>
+                    <div class="card-features">
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Divide & Conquer</span>
+                            <span><i class="fas fa-check"></i> Sorted Arrays</span>
+                        </div>
+                        <div class="feature-row">
+                            <span><i class="fas fa-check"></i> Efficient</span>
+                        </div>
+                    </div>
+                    <div class="complexity">
+                        <span>Time: O(log n)</span>
+                        <span>Space: O(1)</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="module-container" class="module-container hidden">
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 DSA Learning Platform. Built for Computer Engineering Students.</p>
+            <div class="footer-links">
+                <a href="#"><i class="fab fa-github"></i></a>
+                <a href="#"><i class="fas fa-book"></i></a>
+                <a href="#"><i class="fas fa-info-circle"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+    <script src="js/avl-tree.js"></script>
+    <script src="js/bst.js"></script>
+    <script src="js/linked-list.js"></script>
+    <script src="js/stack-queue.js"></script>
+    <script src="js/dynamic-static-list.js"></script>
+    <script src="js/sorting.js"></script>
+    <script src="js/searching.js"></script>
+</body>
+</html>
